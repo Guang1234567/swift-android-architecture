@@ -1,8 +1,8 @@
 buildscript {
     repositories {
-        jcenter()
-        google()
         mavenLocal()
+        google()
+        jcenter()
         maven { url "https://dl.bintray.com/readdle/maven" }
     }
     dependencies {
@@ -15,8 +15,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenLocal()
         google()
+        jcenter()
         maven { url "https://dl.bintray.com/readdle/maven" }
         maven { url "https://jitpack.io" }
     }
