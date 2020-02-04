@@ -45,6 +45,17 @@ public class TasksRepository implements TasksDataSource {
     // Swift JNI release method
     public native void release();
 
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (nativePointer != 0L) {
+                release();
+            }
+        }
+        finally {
+            super.finalize();
+        }
+    }
 
     /**
      * Returns the single instance of this class, creating it if necessary.

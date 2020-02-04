@@ -60,8 +60,11 @@ let package = Package(
         .package(url: "https://github.com/readdle/java_swift.git", .exact("2.1.9")),
         .package(url: "https://github.com/readdle/swift-java.git", .exact("0.2.4")),
         .package(url: "https://github.com/readdle/swift-java-coder.git", .exact("1.0.17")),
+        .package(url: "https://github.com/Guang1234567/swift-android-logcat.git", .branch("master")),
+        //.package(path: "./third_part_libs/swift-android-logcat"),
+        //.package(url: "./third_part_libs/swift-android-logcat", .branch("master"))
     ],
     targets: addGenerated([
-        .target(name: packageName, dependencies: ["java_swift", "JavaCoder"])
+        .target(name: packageName, dependencies: ["java_swift", "JavaCoder", "Logcat",])
     ])
 )

@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "Logcat",
+        "repositoryURL": "https://github.com/Guang1234567/swift-android-logcat.git",
+        "state": {
+          "branch": "master",
+          "revision": "53cba1bb20a89fdf58def5744eb4a050fdf3adeb",
+          "version": null
+        }
+      },
+      {
         "package": "AnyCodable",
         "repositoryURL": "https://github.com/readdle/swift-anycodable.git",
         "state": {

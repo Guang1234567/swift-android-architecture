@@ -4,7 +4,7 @@ apply plugin: 'com.readdle.android.swift'
 swift {
     cleanEnabled true
     debug {
-        extraBuildFlags("-Xswiftc", "-DDEBUG")
+        extraBuildFlags("-Xswiftc", "-DDEBUG","-Xswiftc", "-g"/*, "-v"*/)
     }
 }
 
@@ -53,10 +53,10 @@ android {
 
     // If you need to add more flavors, consider using flavor dimensions.
     productFlavors {
-        mock {
+        /*mock {
             dimension "default"
             applicationIdSuffix = ".mock"
-        }
+        }*/
         prod {
             dimension "default"
         }

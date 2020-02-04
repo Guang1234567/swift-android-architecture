@@ -4,6 +4,8 @@
 
 import Foundation
 
+import Logcat
+
 public protocol LoadTasksDelegate {
 
     func onTasksLoaded(_ tasks: [Task])
@@ -29,6 +31,8 @@ public protocol GetTaskDelegate {
  */
 public class TasksRepository {
 
+    private static let TAG = "TasksRepository"
+
     private static var INSTANCE = TasksRepository()
 
     /**
@@ -37,7 +41,10 @@ public class TasksRepository {
     var mCachedTasks: [String: Task]?
 
     // Prevent direct instantiation.
-    private init() {}
+    private init() {
+
+        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!")
+    }
 
     /**
      * Returns the single instance of this class, creating it if necessary.
