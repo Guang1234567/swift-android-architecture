@@ -4,7 +4,12 @@
 
 import Foundation
 
-import Logcat
+import AndroidSwiftLogcat
+
+import AndroidSwiftTrace
+
+import Backtrace
+//import SwiftBacktrace
 
 public protocol LoadTasksDelegate {
 
@@ -43,7 +48,18 @@ public class TasksRepository {
     // Prevent direct instantiation.
     private init() {
 
+        beginNativeTraceSection("android_swift_systrace_demo")
+
+        Backtrace.install()
         android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!")
+        Backtrace.print()
+        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!2222")
+        //var crashExpected: String? = nil
+        //crashExpected!.uppercased()
+        //android_log(android_LogPriority(4), TasksRepository.TAG, backtrace().joined(separator: "\n"))          // backtrace()
+        //android_log(android_LogPriority(6), TasksRepository.TAG, demangledBacktrace().joined(separator: "\n")) // demangled backtrace
+        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!333")
+        endNativeTraceSection()
     }
 
     /**

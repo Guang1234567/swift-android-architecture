@@ -63,8 +63,21 @@ let package = Package(
         .package(url: "https://github.com/Guang1234567/swift-android-logcat.git", .branch("master")),
         //.package(path: "./third_part_libs/swift-android-logcat"),
         //.package(url: "./third_part_libs/swift-android-logcat", .branch("master"))
+        .package(url: "https://github.com/Guang1234567/swift-android-trace.git", .branch("master")),
+        //.package(path: "./third_part_libs/swift-backtrace"),
+        .package(url: "https://github.com/Guang1234567/swift-backtrace.git", .branch("master")),
+        //.package(path: "./third_part_libs/SwiftBacktrace"),
     ],
     targets: addGenerated([
-        .target(name: packageName, dependencies: ["java_swift", "JavaCoder", "Logcat",])
+        .target(name: packageName,
+                dependencies: [
+                    "java_swift",
+                    "JavaCoder",
+                    "AndroidSwiftLogcat",
+                    "AndroidSwiftTrace",
+                    "Backtrace",
+                    //"SwiftBacktrace",
+                ]
+        )
     ])
 )
