@@ -9,7 +9,6 @@ import AndroidSwiftLogcat
 import AndroidSwiftTrace
 
 import Backtrace
-//import SwiftBacktrace
 
 public protocol LoadTasksDelegate {
 
@@ -47,19 +46,24 @@ public class TasksRepository {
 
     // Prevent direct instantiation.
     private init() {
+        let snt1 = ScopedNativeTraceSection("android_swift_systrace_001")
+        let snt2 = ScopedNativeTraceSection("android_swift_systrace_002")
+        let snt3 = ScopedNativeTraceSection("android_swift_systrace_003")
+        ScopedNativeTraceSection.beginTrace("android_swift_systrace_demo")
 
-        beginNativeTraceSection("android_swift_systrace_demo")
-
+        AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!")
         Backtrace.install()
-        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!")
         Backtrace.print()
-        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!2222")
+        AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!2222")
         //var crashExpected: String? = nil
         //crashExpected!.uppercased()
-        //android_log(android_LogPriority(4), TasksRepository.TAG, backtrace().joined(separator: "\n"))          // backtrace()
-        //android_log(android_LogPriority(6), TasksRepository.TAG, demangledBacktrace().joined(separator: "\n")) // demangled backtrace
-        android_log(android_LogPriority(5), TasksRepository.TAG, "TasksRepository init !!!333")
-        endNativeTraceSection()
+        AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!333")
+
+        ScopedNativeTraceSection.endTrace("android_swift_systrace_demo")
+
+        AndroidLogcat.i(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion = \(ScopedNativeTraceSection.sdkVersion)")
+
+        AndroidLogcat.i(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion2 = \(ScopedNativeTraceSection.sdkVersion)")
     }
 
     /**
@@ -91,8 +95,7 @@ public class TasksRepository {
         // Respond immediately with cache if available and not dirty
         if let tasks = mCachedTasks?.values {
             callback.onTasksLoaded(Array(tasks))
-        }
-        else {
+        } else {
             callback.onTasksLoaded([])
         }
     }
@@ -128,7 +131,7 @@ public class TasksRepository {
         if (mCachedTasks == nil) {
             mCachedTasks = [String: Task]()
         }
-        mCachedTasks?[task.id] =  activeTask
+        mCachedTasks?[task.id] = activeTask
     }
 
     public func activateTaskWithId(_ id: String) {
@@ -145,7 +148,9 @@ public class TasksRepository {
         }
 
         // Filter by isCompleted of Task ($0 is a tuple of type `(key: String, value: Task)`)
-        mCachedTasks = mCachedTasks?.filter { $0.value.completed == false }
+        mCachedTasks = mCachedTasks?.filter {
+            $0.value.completed == false
+        }
     }
 
     /**
@@ -159,8 +164,7 @@ public class TasksRepository {
         // Respond immediately with cache if available
         if let cachedTask = mCachedTasks?[taskId] {
             callback.onTaskLoaded(cachedTask)
-        }
-        else {
+        } else {
             callback.onDataNotAvailable()
         }
     }

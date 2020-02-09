@@ -2,9 +2,30 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.readdle.android.swift'
 
 swift {
-    cleanEnabled true
+    // helpers to forward flags from Swift Package Manager to Swift Compiler Frontend
+    //def passToFrontend = ["-Xswiftc", "-Xfrontend", "-Xswiftc"]
+    //def disableObjcAttr = passToFrontend + "-experimental-disable-objc-attr"
+
+    // Enables swift clean when ./gradlew clean invoked. Default true
+    cleanEnabled false
+
+    // Custom swift flags for debug build
     debug {
-        extraBuildFlags("-Xswiftc", "-DDEBUG","-Xswiftc", "-g"/*, "-v"*/)
+        extraBuildFlags "-Xswiftc", "-DDEBUG"
+        // Enable symbols
+        extraBuildFlags "-Xswiftc", "-g"
+        // Disable @objc and dynamic
+        //extraBuildFlags disableObjcAttr
+        // Enable build verbose
+        //extraBuildFlags("-Xswiftc", "-v")
+    }
+
+    // Custom swift flags for release build
+    release {
+        // Enable symbols in relase mode
+        extraBuildFlags "-Xswiftc", "-g"
+        // Disable @objc and dynamic
+        //extraBuildFlags disableObjcAttr
     }
 }
 
@@ -19,6 +40,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+        ndk {
+            //abiFilters 'arm64-v8a', 'x86_64'
+        }
     }
 
     buildTypes {

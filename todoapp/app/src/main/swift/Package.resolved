@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/Guang1234567/swift-android-logcat.git",
         "state": {
           "branch": "master",
-          "revision": "22f2c5f91311e4f3b7655a2a8bbfdae8d0e0d614",
+          "revision": "49ee7e59cfbe3c3c5d469882395beecada4fe381",
           "version": null
         }
       },
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/Guang1234567/swift-android-trace.git",
         "state": {
           "branch": "master",
-          "revision": "3acaec80b5a375c197d7c7f941c23e916e9a0f24",
+          "revision": "6ae33a257e5cdf264ff286e0b60117ad6c880ec7",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/Guang1234567/swift-backtrace.git",
         "state": {
           "branch": "master",
-          "revision": "e46788c99f6439febd34cd1298b36d1c5d096b84",
+          "revision": "6972557b88aeb28c87c440112c1b447bf75db5c7",
           "version": null
         }
       },
