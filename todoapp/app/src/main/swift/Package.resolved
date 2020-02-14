@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "SQLite_swift_android",
+        "repositoryURL": "https://github.com/Guang1234567/SQLite.swift.android.git",
+        "state": {
+          "branch": "master",
+          "revision": "ccce91f70dfb4a3b54c68ff5f6062ecb7a96079b",
+          "version": null
+        }
+      },
+      {
         "package": "AndroidSwiftLogcat",
         "repositoryURL": "https://github.com/Guang1234567/swift-android-logcat.git",
         "state": {

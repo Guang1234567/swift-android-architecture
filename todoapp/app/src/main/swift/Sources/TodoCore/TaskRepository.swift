@@ -10,6 +10,8 @@ import AndroidSwiftTrace
 
 import Backtrace
 
+import SQLite_swift_android
+
 public protocol LoadTasksDelegate {
 
     func onTasksLoaded(_ tasks: [Task])
@@ -61,9 +63,27 @@ public class TasksRepository {
 
         ScopedNativeTraceSection.endTrace("android_swift_systrace_demo")
 
-        AndroidLogcat.i(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion = \(ScopedNativeTraceSection.sdkVersion)")
+        let db = SQLiteDB.shared
+        let isOpened = db.open(dbPath: "/sdcard/test123.db")
+        AndroidLogcat.w(TasksRepository.TAG, "isOpened = \(isOpened)")
+        let category1 = Category()
+        category1.name = "My New Category1"
+        _ = category1.save()
+        let category2 = Category()
+        category2.name = "My New Category2"
+        _ = category2.save()
 
-        AndroidLogcat.i(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion2 = \(ScopedNativeTraceSection.sdkVersion)")
+        if let category = Category.rowBy(id: 1) {
+            AndroidLogcat.w(TasksRepository.TAG, "Found category with ID = 1")
+        }
+
+        let array = Category.rows(filter: "id > 0")
+
+        if let category = Category.rowBy(id: 1) {
+            category.delete() // note: just set `isDeleted` field to `1`, not delete it really.
+            AndroidLogcat.w(TasksRepository.TAG, "Deleted category with ID = 1")
+        }
+        db.closeDB()
     }
 
     /**

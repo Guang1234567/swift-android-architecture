@@ -67,6 +67,8 @@ let package = Package(
         //.package(path: "./third_part_libs/swift-android-trace"),
         .package(url: "https://github.com/Guang1234567/swift-backtrace.git", .branch("master")),
         //.package(path: "./third_part_libs/swift-backtrace"),
+        .package(url: "https://github.com/Guang1234567/SQLite.swift.android.git", .branch("master")),
+        //.package(path: "./third_part_libs/SQLite.swift.android"),
     ],
     targets: addGenerated([
         .target(name: packageName,
@@ -76,7 +78,7 @@ let package = Package(
                     "AndroidSwiftLogcat",
                     "AndroidSwiftTrace",
                     "Backtrace",
-                    //"SwiftBacktrace",
+                    "SQLite_swift_android",
                 ]
         )
     ])
