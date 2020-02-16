@@ -13,17 +13,15 @@ import Backtrace
 import SQLite_swift_android
 
 public protocol LoadTasksDelegate {
-
     func onTasksLoaded(_ tasks: [Task])
 
     func onDataNotAvailable()
 }
 
 public protocol GetTaskDelegate {
+    func onTaskLoaded(_ task: Task)
 
-    func onTaskLoaded(_ task: Task);
-
-    func onDataNotAvailable();
+    func onDataNotAvailable()
 }
 
 /**
@@ -36,7 +34,6 @@ public protocol GetTaskDelegate {
  * //TODO: Implement this class using LiveData.
  */
 public class TasksRepository {
-
     private static let TAG = "TasksRepository"
 
     private static var INSTANCE = TasksRepository()
@@ -57,8 +54,8 @@ public class TasksRepository {
         Backtrace.install()
         Backtrace.print()
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!2222")
-        //var crashExpected: String? = nil
-        //crashExpected!.uppercased()
+        // var crashExpected: String? = nil
+        // crashExpected!.uppercased()
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!333")
 
         ScopedNativeTraceSection.endTrace("android_swift_systrace_demo")
@@ -83,7 +80,49 @@ public class TasksRepository {
             category.delete() // note: just set `isDeleted` field to `1`, not delete it really.
             AndroidLogcat.w(TasksRepository.TAG, "Deleted category with ID = 1")
         }
+
+        db.transaction {
+            let category = Category()
+            category.name = "Transaction_Outter"
+            _ = category.save()
+            db.transaction {
+                let category = Category()
+                category.name = "Transaction_inner_1"
+                _ = category.save()
+                db.transaction {
+                    let category = Category()
+                    category.name = "Transaction_inner_1_1"
+                    _ = category.save()
+
+                    throw MyError.forTest
+                }
+            }
+
+            db.transaction {
+                let category = Category()
+                category.name = "Transaction_inner_2"
+                _ = category.save()
+            }
+
+            db.transaction { txn in
+                txn.beginTransaction()
+                do {
+                    let category = Category()
+                    category.name = "Transaction_inner_2"
+                    _ = category.save()
+
+                    txn.commit()
+                } catch {
+                    txn.rollback()
+                }
+            }
+        }
+
         db.closeDB()
+    }
+
+    enum MyError: Error {
+        case forTest
     }
 
     /**
@@ -111,7 +150,6 @@ public class TasksRepository {
      * get the data.
      */
     public func getTasks(_ callback: LoadTasksDelegate) {
-
         // Respond immediately with cache if available and not dirty
         if let tasks = mCachedTasks?.values {
             callback.onTasksLoaded(Array(tasks))
@@ -122,7 +160,7 @@ public class TasksRepository {
 
     public func saveTask(_ task: Task) {
         // Do in memory cache update to keep the app UI up to date
-        if (mCachedTasks == nil) {
+        if mCachedTasks == nil {
             mCachedTasks = [String: Task]()
         }
         mCachedTasks?[task.id] = task
@@ -132,7 +170,7 @@ public class TasksRepository {
         let completedTask = Task(id: task.id, title: task.title, description: task.description, completed: true)
 
         // Do in memory cache update to keep the app UI up to date
-        if (mCachedTasks == nil) {
+        if mCachedTasks == nil {
             mCachedTasks = [String: Task]()
         }
         mCachedTasks?[task.id] = completedTask
@@ -148,7 +186,7 @@ public class TasksRepository {
         let activeTask = Task(id: task.id, title: task.title, description: task.description)
 
         // Do in memory cache update to keep the app UI up to date
-        if (mCachedTasks == nil) {
+        if mCachedTasks == nil {
             mCachedTasks = [String: Task]()
         }
         mCachedTasks?[task.id] = activeTask
@@ -161,9 +199,8 @@ public class TasksRepository {
     }
 
     public func clearCompletedTasks() {
-
         // Do in memory cache update to keep the app UI up to date
-        if (mCachedTasks == nil) {
+        if mCachedTasks == nil {
             mCachedTasks = [String: Task]()
         }
 
@@ -193,9 +230,8 @@ public class TasksRepository {
         // Do nothing
     }
 
-
     public func deleteAllTasks() {
-        if (mCachedTasks == nil) {
+        if mCachedTasks == nil {
             mCachedTasks = [String: Task]()
         }
         mCachedTasks?.removeAll()
