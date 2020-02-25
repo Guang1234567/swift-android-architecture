@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/Guang1234567/SQLite.swift.android.git",
         "state": {
           "branch": "master",
-          "revision": "233c93ca80d52a967dccd554b56807b2fe5135ae",
+          "revision": "2189589dd67d02b2eb1151e90631ed1146efd822",
           "version": null
         }
       },
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/Guang1234567/swift-android-trace.git",
         "state": {
           "branch": "master",
-          "revision": "6ae33a257e5cdf264ff286e0b60117ad6c880ec7",
+          "revision": "cc6162f729be1f18055ffdf903d84ec411cbc572",
           "version": null
         }
       },
@@ -80,6 +80,24 @@
           "branch": null,
           "revision": "065a7d03a5a77637ea5fc64ead050bbb93a9f8c3",
           "version": "1.0.17"
+        }
+      },
+      {
+        "package": "Swift-Posix-Thread",
+        "repositoryURL": "https://github.com/Guang1234567/Swift-Posix-Thread.git",
+        "state": {
+          "branch": "master",
+          "revision": "9f87c61acea898be2e33c77adab0ec3d643c3577",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftThreadLocal",
+        "repositoryURL": "https://github.com/Guang1234567/SwiftThreadLocal.git",
+        "state": {
+          "branch": "master",
+          "revision": "c38b304d9d5bb87990394b6bdb0c747b75c5538f",
+          "version": null
         }
       }
     ]

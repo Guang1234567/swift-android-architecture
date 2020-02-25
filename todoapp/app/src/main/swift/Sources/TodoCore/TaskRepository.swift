@@ -12,6 +12,8 @@ import Backtrace
 
 import SQLite_swift_android
 
+import Swift_Posix_Thread
+
 public protocol LoadTasksDelegate {
     func onTasksLoaded(_ tasks: [Task])
 
@@ -49,10 +51,12 @@ public class TasksRepository {
         let snt2 = ScopedNativeTraceSection("android_swift_systrace_002")
         let snt3 = ScopedNativeTraceSection("android_swift_systrace_003")
         ScopedNativeTraceSection.beginTrace("android_swift_systrace_demo")
+        
+        AndroidLogcat.e(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion = \(ScopedNativeTraceSection.sdkVersion)")
 
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!")
         Backtrace.install()
-        Backtrace.print()
+        //Backtrace.print()
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!2222")
         // var crashExpected: String? = nil
         // crashExpected!.uppercased()
@@ -60,65 +64,139 @@ public class TasksRepository {
 
         ScopedNativeTraceSection.endTrace("android_swift_systrace_demo")
 
-        let db = SQLiteDB.shared
+        let db = SQLiteDB()
         let isOpened = db.open(dbPath: "/sdcard/test123.db")
         AndroidLogcat.w(TasksRepository.TAG, "isOpened = \(isOpened)")
-        let category1 = Category()
+        let category1 = Category(db: db)
         category1.name = "My New Category1"
         _ = category1.save()
-        let category2 = Category()
+        let category2 = Category(db: db)
         category2.name = "My New Category2"
         _ = category2.save()
 
-        if let category = Category.rowBy(id: 1) {
+        if let category = Category.rowBy(db: db, id: 1) {
             AndroidLogcat.w(TasksRepository.TAG, "Found category with ID = 1")
         }
 
-        let array = Category.rows(filter: "id > 0")
+        let array = Category.rows(db: db, filter: "id > 0")
 
-        if let category = Category.rowBy(id: 1) {
+        if let category = Category.rowBy(db: db, id: 1) {
             category.delete() // note: just set `isDeleted` field to `1`, not delete it really.
             AndroidLogcat.w(TasksRepository.TAG, "Deleted category with ID = 1")
         }
 
-        db.transaction {
-            let category = Category()
-            category.name = "Transaction_Outter"
-            _ = category.save()
+        let testQueue = DispatchQueue(label: "forTest", attributes: [.concurrent])
+
+        testQueue.async(qos: .background) {
             db.transaction {
-                let category = Category()
-                category.name = "Transaction_inner_1"
+                let category = Category(db: db)
+                category.name = "1-Transaction_Outter"
                 _ = category.save()
                 db.transaction {
-                    let category = Category()
-                    category.name = "Transaction_inner_1_1"
+                    let category = Category(db: db)
+                    category.name = "1-Transaction_inner_1"
                     _ = category.save()
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "1-Transaction_inner_1_1"
+                        _ = category.save()
 
-                    throw MyError.forTest
+                        throw MyError.forTest
+                    }
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "1-Transaction_inner_1_2"
+                        _ = category.save()
+                    }
                 }
-            }
 
-            db.transaction {
-                let category = Category()
-                category.name = "Transaction_inner_2"
-                _ = category.save()
-            }
-
-            db.transaction { txn in
-                txn.beginTransaction()
-                do {
-                    let category = Category()
-                    category.name = "Transaction_inner_2"
+                db.transaction {
+                    let category = Category(db: db)
+                    category.name = "1-Transaction_inner_2"
                     _ = category.save()
 
-                    txn.commit()
-                } catch {
-                    txn.rollback()
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "1-Transaction_inner_2-1"
+                        _ = category.save()
+
+                        throw MyError.forTest
+                    }
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "1-Transaction_inner_2-2"
+                        _ = category.save()
+                    }
                 }
             }
         }
 
-        db.closeDB()
+        testQueue.async(qos: .userInteractive) {
+            db.transaction {
+                let category = Category(db: db)
+                category.name = "2-Transaction_Outter"
+                _ = category.save()
+                db.transaction {
+                    let category = Category(db: db)
+                    category.name = "2-Transaction_inner_1"
+                    _ = category.save()
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "2-Transaction_inner_1_1"
+                        _ = category.save()
+
+                        throw MyError.forTest
+                    }
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "2-Transaction_inner_1_2"
+                        _ = category.save()
+                    }
+                }
+
+                db.transaction {
+                    let category = Category(db: db)
+                    category.name = "2-Transaction_inner_2"
+                    _ = category.save()
+
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "2-Transaction_inner_2-1"
+                        _ = category.save()
+
+                        throw MyError.forTest
+                    }
+                    db.transaction {
+                        let category = Category(db: db)
+                        category.name = "2-Transaction_inner_2-2"
+                        _ = category.save()
+                    }
+                }
+            }
+        }
+
+        // db.closeDB()
+        
+        
+        if let pthread2: PosixThread<Void> = PosixThread({ () in
+
+            AndroidLogcat.i(TasksRepository.TAG, "2start a new thread return void")
+
+            print("2current Thread \(Thread.current)")
+
+            print("2 no input param")
+
+            return ()
+        }) {
+            let threadResult: Void? = pthread2.join()
+            if let threadResult = threadResult {
+                AndroidLogcat.i(TasksRepository.TAG, "result2 = \(threadResult)")
+            } else {
+                AndroidLogcat.i(TasksRepository.TAG, "result2 = nil")
+            }
+        } else {
+            AndroidLogcat.i(TasksRepository.TAG, "create Posix thread2 fail!")
+        }
     }
 
     enum MyError: Error {
