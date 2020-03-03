@@ -1,6 +1,8 @@
 .idea
 todoapp/app/src/main/jniLibs
-todoapp/app/src/main/swift/.build
+todoapp/app/src/main/swift/.build/*
+!todoapp/app/src/main/swift/.build/jniLibs
 todoapp/app/src/main/swift/TodoCore.xcodeproj
 .DS_Store
 .swiftpm
+/todoapp/app/src/main/swift/third_part_libs

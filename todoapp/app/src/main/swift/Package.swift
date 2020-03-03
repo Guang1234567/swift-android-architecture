@@ -1,6 +1,7 @@
 // swift-tools-version:5.0
-import PackageDescription
+
 import Foundation
+import PackageDescription
 
 let packageName = "TodoCore"
 
@@ -10,8 +11,8 @@ let generatedPath = ".build/\(generatedName.lowercased())"
 
 let isSourcesGenerated: Bool = {
     let basePath = URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .path
+        .deletingLastPathComponent()
+        .path
 
     let fileManager = FileManager()
     fileManager.changeCurrentDirectoryPath(basePath)
@@ -44,12 +45,13 @@ func addGenerated(_ targets: [Target]) -> [Target] {
                 .byName(name: packageName),
                 "java_swift",
                 "Java",
-                "JavaCoder",
+                "JavaCoder"
             ],
             path: generatedPath
         )
     ]
 }
+
 // generated sources integration end
 
 let package = Package(
@@ -61,15 +63,17 @@ let package = Package(
         .package(url: "https://github.com/readdle/swift-java.git", .exact("0.2.4")),
         .package(url: "https://github.com/readdle/swift-java-coder.git", .exact("1.0.17")),
         .package(url: "https://github.com/Guang1234567/swift-android-logcat.git", .branch("master")),
-        //.package(path: "./third_part_libs/swift-android-logcat"),
-        //.package(url: "./third_part_libs/swift-android-logcat", .branch("master"))
+        // .package(path: "./third_part_libs/swift-android-logcat"),
+        // .package(url: "./third_part_libs/swift-android-logcat", .branch("master"))
         .package(url: "https://github.com/Guang1234567/swift-android-trace.git", .branch("master")),
-        //.package(path: "./third_part_libs/swift-android-trace"),
+        // .package(path: "./third_part_libs/swift-android-trace"),
         .package(url: "https://github.com/Guang1234567/swift-backtrace.git", .branch("master")),
-        //.package(path: "./third_part_libs/swift-backtrace"),
+        // .package(path: "./third_part_libs/swift-backtrace"),
         .package(url: "https://github.com/Guang1234567/SQLite.swift.android.git", .branch("master")),
-        //.package(path: "./third_part_libs/SQLite.swift.android"),
-        .package(url: "https://github.com/Guang1234567/Swift-Posix-Thread.git", .branch("master"))
+        // .package(path: "./third_part_libs/SQLite.swift.android"),
+        .package(url: "https://github.com/Guang1234567/Swift-Posix-Thread.git", .branch("master")),
+        .package(url: "https://github.com/Guang1234567/swift-transcode-tcforge.git", .branch("master")),
+        .package(url: "https://github.com/Guang1234567/Swift_Android_Bitmap.git", .branch("master"))
     ],
     targets: addGenerated([
         .target(name: packageName,
@@ -80,8 +84,9 @@ let package = Package(
                     "AndroidSwiftTrace",
                     "Backtrace",
                     "SQLite_swift_android",
-                    "Swift-Posix-Thread"
-                ]
-        )
+                    "Swift-Posix-Thread",
+                    "Avi",
+                    "Swift_Android_Bitmap",
+                ])
     ])
 )

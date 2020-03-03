@@ -10,10 +10,9 @@ import Foundation
 import SQLite_swift_android
 
 class Category: SQLTable {
+    var name = ""
 
-	var name = ""
-	
-	var description:String {
-		return "id: \(id), name: \(name)"
-	}
+    var description: String {
+        return "id: \(id), name: \(name)"
+    }
 }

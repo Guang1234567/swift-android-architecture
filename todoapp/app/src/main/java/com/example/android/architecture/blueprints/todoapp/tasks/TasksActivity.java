@@ -36,6 +36,7 @@ import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTa
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.videoplayer.AviBitmapPlayerActivity;
 
 
 public class TasksActivity extends AppCompatActivity implements TaskItemNavigator, TasksNavigator {
@@ -138,11 +139,18 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
                             case R.id.list_navigation_menu_item:
                                 // Do nothing, we're already on that screen
                                 break;
-                            case R.id.statistics_navigation_menu_item:
+                            case R.id.statistics_navigation_menu_item: {
                                 Intent intent =
                                         new Intent(TasksActivity.this, StatisticsActivity.class);
                                 startActivity(intent);
                                 break;
+                            }
+                            case R.id.avi_bitmap_player_navigation_menu_item: {
+                                Intent intent =
+                                        new Intent(TasksActivity.this, AviBitmapPlayerActivity.class);
+                                startActivity(intent);
+                                break;
+                            }
                             default:
                                 break;
                         }

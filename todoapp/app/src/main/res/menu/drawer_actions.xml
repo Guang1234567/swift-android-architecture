@@ -24,4 +24,9 @@
         android:id="@+id/statistics_navigation_menu_item"
         android:icon="@drawable/ic_statistics"
         android:title="@string/statistics_title" />
+
+    <item
+        android:id="@+id/avi_bitmap_player_navigation_menu_item"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/avi_bitmap_player_title" />
 </menu>

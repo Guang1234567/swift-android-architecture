@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/Guang1234567/SQLite.swift.android.git",
         "state": {
           "branch": "master",
-          "revision": "2189589dd67d02b2eb1151e90631ed1146efd822",
+          "revision": "92fb02d5dfeef736b6e72dfbbf926bae83624f9f",
           "version": null
         }
       },
@@ -87,7 +87,25 @@
         "repositoryURL": "https://github.com/Guang1234567/Swift-Posix-Thread.git",
         "state": {
           "branch": "master",
-          "revision": "9f87c61acea898be2e33c77adab0ec3d643c3577",
+          "revision": "ddeb32ce783861cb8eb5c2219f6368f51b2edc9c",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-transcode-tcforge",
+        "repositoryURL": "https://github.com/Guang1234567/swift-transcode-tcforge.git",
+        "state": {
+          "branch": "master",
+          "revision": "cbe0751c6724db9aff34b7d3fae12f7784d5acbb",
+          "version": null
+        }
+      },
+      {
+        "package": "Swift_Android_Bitmap",
+        "repositoryURL": "https://github.com/Guang1234567/Swift_Android_Bitmap.git",
+        "state": {
+          "branch": "master",
+          "revision": "c4ccc89e84fa7150c79ca716bedde95d092cd809",
           "version": null
         }
       },

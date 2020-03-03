@@ -51,12 +51,12 @@ public class TasksRepository {
         let snt2 = ScopedNativeTraceSection("android_swift_systrace_002")
         let snt3 = ScopedNativeTraceSection("android_swift_systrace_003")
         ScopedNativeTraceSection.beginTrace("android_swift_systrace_demo")
-        
+
         AndroidLogcat.e(TasksRepository.TAG, "ScopedNativeTraceSection.sdkVersion = \(ScopedNativeTraceSection.sdkVersion)")
 
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!")
         Backtrace.install()
-        //Backtrace.print()
+        // Backtrace.print()
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!2222")
         // var crashExpected: String? = nil
         // crashExpected!.uppercased()
@@ -88,96 +88,103 @@ public class TasksRepository {
         let testQueue = DispatchQueue(label: "forTest", attributes: [.concurrent])
 
         testQueue.async(qos: .background) {
-            db.transaction {
-                let category = Category(db: db)
-                category.name = "1-Transaction_Outter"
-                _ = category.save()
-                db.transaction {
+            do {
+                try db.transaction {
                     let category = Category(db: db)
-                    category.name = "1-Transaction_inner_1"
+                    category.name = "1-Transaction_Outter"
                     _ = category.save()
-                    db.transaction {
+                    try db.transaction {
                         let category = Category(db: db)
-                        category.name = "1-Transaction_inner_1_1"
+                        category.name = "1-Transaction_inner_1"
+                        _ = category.save()
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "1-Transaction_inner_1_1"
+                            _ = category.save()
+
+                            throw MyError.forTest
+                        }
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "1-Transaction_inner_1_2"
+                            _ = category.save()
+                        }
+                    }
+
+                    try db.transaction {
+                        let category = Category(db: db)
+                        category.name = "1-Transaction_inner_2"
                         _ = category.save()
 
-                        throw MyError.forTest
-                    }
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "1-Transaction_inner_1_2"
-                        _ = category.save()
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "1-Transaction_inner_2-1"
+                            _ = category.save()
+
+                            throw MyError.forTest
+                        }
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "1-Transaction_inner_2-2"
+                            _ = category.save()
+                        }
                     }
                 }
-
-                db.transaction {
-                    let category = Category(db: db)
-                    category.name = "1-Transaction_inner_2"
-                    _ = category.save()
-
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "1-Transaction_inner_2-1"
-                        _ = category.save()
-
-                        throw MyError.forTest
-                    }
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "1-Transaction_inner_2-2"
-                        _ = category.save()
-                    }
-                }
+            } catch {
+                // ignore
             }
         }
 
         testQueue.async(qos: .userInteractive) {
-            db.transaction {
-                let category = Category(db: db)
-                category.name = "2-Transaction_Outter"
-                _ = category.save()
-                db.transaction {
+            do {
+                try db.transaction {
                     let category = Category(db: db)
-                    category.name = "2-Transaction_inner_1"
+                    category.name = "2-Transaction_Outter"
                     _ = category.save()
-                    db.transaction {
+                    try db.transaction {
                         let category = Category(db: db)
-                        category.name = "2-Transaction_inner_1_1"
+                        category.name = "2-Transaction_inner_1"
+                        _ = category.save()
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "2-Transaction_inner_1_1"
+                            _ = category.save()
+
+                            throw MyError.forTest
+                        }
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "2-Transaction_inner_1_2"
+                            _ = category.save()
+                        }
+                    }
+
+                    try db.transaction {
+                        let category = Category(db: db)
+                        category.name = "2-Transaction_inner_2"
                         _ = category.save()
 
-                        throw MyError.forTest
-                    }
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "2-Transaction_inner_1_2"
-                        _ = category.save()
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "2-Transaction_inner_2-1"
+                            _ = category.save()
+
+                            throw MyError.forTest
+                        }
+                        try db.transaction {
+                            let category = Category(db: db)
+                            category.name = "2-Transaction_inner_2-2"
+                            _ = category.save()
+                        }
                     }
                 }
-
-                db.transaction {
-                    let category = Category(db: db)
-                    category.name = "2-Transaction_inner_2"
-                    _ = category.save()
-
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "2-Transaction_inner_2-1"
-                        _ = category.save()
-
-                        throw MyError.forTest
-                    }
-                    db.transaction {
-                        let category = Category(db: db)
-                        category.name = "2-Transaction_inner_2-2"
-                        _ = category.save()
-                    }
-                }
+            } catch {
+                // ignore
             }
         }
 
         // db.closeDB()
-        
-        
+
         if let pthread2: PosixThread<Void> = PosixThread({ () in
 
             AndroidLogcat.i(TasksRepository.TAG, "2start a new thread return void")
