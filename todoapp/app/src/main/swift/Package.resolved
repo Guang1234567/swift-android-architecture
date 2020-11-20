@@ -12,7 +12,7 @@
       },
       {
         "package": "java_swift",
-        "repositoryURL": "https://github.com/readdle/java_swift.git",
+        "repositoryURL": "https://hub.fastgit.org/readdle/java_swift.git",
         "state": {
           "branch": null,
           "revision": "30860b7664e0cffd11dbd15bc5e70952896207a2",
@@ -20,8 +20,17 @@
         }
       },
       {
+        "package": "RxSwift",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/RxSwift.git",
+        "state": {
+          "branch": "5.1.1_patch_support_android",
+          "revision": "3e6c9e7eb0d5f6e654248fa9182e643ee40ec5fb",
+          "version": null
+        }
+      },
+      {
         "package": "SQLite_swift_android",
-        "repositoryURL": "https://github.com/Guang1234567/SQLite.swift.android.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/SQLite.swift.android.git",
         "state": {
           "branch": "master",
           "revision": "92fb02d5dfeef736b6e72dfbbf926bae83624f9f",
@@ -30,7 +39,7 @@
       },
       {
         "package": "AndroidSwiftLogcat",
-        "repositoryURL": "https://github.com/Guang1234567/swift-android-logcat.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/swift-android-logcat.git",
         "state": {
           "branch": "master",
           "revision": "49ee7e59cfbe3c3c5d469882395beecada4fe381",
@@ -39,7 +48,7 @@
       },
       {
         "package": "AndroidSwiftTrace",
-        "repositoryURL": "https://github.com/Guang1234567/swift-android-trace.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/swift-android-trace.git",
         "state": {
           "branch": "master",
           "revision": "cc6162f729be1f18055ffdf903d84ec411cbc572",
@@ -57,7 +66,7 @@
       },
       {
         "package": "swift-backtrace",
-        "repositoryURL": "https://github.com/Guang1234567/swift-backtrace.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/swift-backtrace.git",
         "state": {
           "branch": "master",
           "revision": "6972557b88aeb28c87c440112c1b447bf75db5c7",
@@ -66,7 +75,7 @@
       },
       {
         "package": "Java",
-        "repositoryURL": "https://github.com/readdle/swift-java.git",
+        "repositoryURL": "https://hub.fastgit.org/readdle/swift-java.git",
         "state": {
           "branch": null,
           "revision": "38459fc901d2ecd9655994459a6f099537a2cb98",
@@ -75,7 +84,7 @@
       },
       {
         "package": "JavaCoder",
-        "repositoryURL": "https://github.com/readdle/swift-java-coder.git",
+        "repositoryURL": "https://hub.fastgit.org/readdle/swift-java-coder.git",
         "state": {
           "branch": null,
           "revision": "065a7d03a5a77637ea5fc64ead050bbb93a9f8c3",
@@ -84,7 +93,7 @@
       },
       {
         "package": "Swift-Posix-Thread",
-        "repositoryURL": "https://github.com/Guang1234567/Swift-Posix-Thread.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift-Posix-Thread.git",
         "state": {
           "branch": "master",
           "revision": "ddeb32ce783861cb8eb5c2219f6368f51b2edc9c",
@@ -93,7 +102,7 @@
       },
       {
         "package": "swift-transcode-tcforge",
-        "repositoryURL": "https://github.com/Guang1234567/swift-transcode-tcforge.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/swift-transcode-tcforge.git",
         "state": {
           "branch": "master",
           "revision": "cbe0751c6724db9aff34b7d3fae12f7784d5acbb",
@@ -102,10 +111,37 @@
       },
       {
         "package": "Swift_Android_Bitmap",
-        "repositoryURL": "https://github.com/Guang1234567/Swift_Android_Bitmap.git",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Android_Bitmap.git",
         "state": {
           "branch": "master",
           "revision": "c4ccc89e84fa7150c79ca716bedde95d092cd809",
+          "version": null
+        }
+      },
+      {
+        "package": "Swift_Atomics",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Atomics.git",
+        "state": {
+          "branch": "master",
+          "revision": "32a8c89a132c5d6d4330002dc65af2953306d3b6",
+          "version": null
+        }
+      },
+      {
+        "package": "Swift_Boost_Context",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Boost_Context.git",
+        "state": {
+          "branch": "master",
+          "revision": "b5e7497a928c38e99cd4890ff0faf1c39866f0c8",
+          "version": null
+        }
+      },
+      {
+        "package": "Swift_Coroutine",
+        "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Coroutine.git",
+        "state": {
+          "branch": "master",
+          "revision": "5797a8cbcf58041143d741cf049ba2c2e802d539",
           "version": null
         }
       },
