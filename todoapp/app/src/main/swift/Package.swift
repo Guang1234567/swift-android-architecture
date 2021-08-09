@@ -1,5 +1,4 @@
 // swift-tools-version:5.0
-
 import Foundation
 import PackageDescription
 
@@ -10,15 +9,11 @@ let generatedName = "Generated"
 let generatedPath = ".build/\(generatedName.lowercased())"
 
 let isSourcesGenerated: Bool = {
-    let basePath = URL(fileURLWithPath: #file)
-        .deletingLastPathComponent()
-        .path
-
-    let fileManager = FileManager()
-    fileManager.changeCurrentDirectoryPath(basePath)
+    let baseURL = URL(fileURLWithPath: #file).deletingLastPathComponent()
+    let generatedURL = baseURL.appendingPathComponent(generatedPath)
 
     var isDirectory: ObjCBool = false
-    let exists = fileManager.fileExists(atPath: generatedPath, isDirectory: &isDirectory)
+    let exists = FileManager.default.fileExists(atPath: generatedURL.path, isDirectory: &isDirectory)
 
     return exists && isDirectory.boolValue
 }()
@@ -45,13 +40,12 @@ func addGenerated(_ targets: [Target]) -> [Target] {
                 .byName(name: packageName),
                 "java_swift",
                 "Java",
-                "JavaCoder"
+                "JavaCoder",
             ],
             path: generatedPath
         )
     ]
 }
-
 // generated sources integration end
 
 let package = Package(
@@ -59,9 +53,11 @@ let package = Package(
     products: addGenerated([
     ]),
     dependencies: [
-        .package(url: "https://hub.fastgit.org/readdle/java_swift.git", .exact("2.1.9")),
-        .package(url: "https://hub.fastgit.org/readdle/swift-java.git", .exact("0.2.4")),
-        .package(url: "https://hub.fastgit.org/readdle/swift-java-coder.git", .exact("1.0.17")),
+        .package(url: "https://hub.fastgit.org/readdle/java_swift.git", .upToNextMinor(from: "2.1.9")),
+        .package(url: "https://hub.fastgit.org/readdle/swift-java.git", .upToNextMinor(from: "0.2.4")),
+        .package(url: "https://hub.fastgit.org/readdle/swift-java-coder.git", .branch("dev/kotlin-support")),
+        .package(url: "https://hub.fastgit.org/readdle/swift-anycodable.git", .upToNextMinor(from: "1.0.3")),
+
         .package(url: "https://hub.fastgit.org/Guang1234567/swift-android-logcat.git", .branch("master")),
         // .package(path: "./third_part_libs/swift-android-logcat"),
         // .package(url: "./third_part_libs/swift-android-logcat", .branch("master"))
@@ -83,8 +79,10 @@ let package = Package(
     targets: addGenerated([
         .target(name: packageName,
                 dependencies: [
+                    "AnyCodable",
                     "java_swift",
                     "JavaCoder",
+
                     "AndroidSwiftLogcat",
                     "AndroidSwiftTrace",
                     "Backtrace",

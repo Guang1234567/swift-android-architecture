@@ -57,7 +57,7 @@
       },
       {
         "package": "AnyCodable",
-        "repositoryURL": "https://github.com/readdle/swift-anycodable.git",
+        "repositoryURL": "https://hub.fastgit.org/readdle/swift-anycodable.git",
         "state": {
           "branch": null,
           "revision": "9163d43ad317d938629592bbae798a95a3a0a4cf",
@@ -86,9 +86,9 @@
         "package": "JavaCoder",
         "repositoryURL": "https://hub.fastgit.org/readdle/swift-java-coder.git",
         "state": {
-          "branch": null,
-          "revision": "065a7d03a5a77637ea5fc64ead050bbb93a9f8c3",
-          "version": "1.0.17"
+          "branch": "dev/kotlin-support",
+          "revision": "a794ec4cf4d825bfc10d1848342634f7b0ca3f32",
+          "version": null
         }
       },
       {

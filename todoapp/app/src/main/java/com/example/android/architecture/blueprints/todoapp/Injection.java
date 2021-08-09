@@ -35,6 +35,6 @@ public class Injection {
     public static TasksRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
         JavaSwift.init();
-        return TasksRepository.getInstance();
+        return TasksRepository.init();
     }
 }

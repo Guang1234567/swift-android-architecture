@@ -44,15 +44,13 @@ public protocol GetTaskDelegate {
 public class TasksRepository {
     private static let TAG = "TasksRepository"
 
-    private static var INSTANCE = TasksRepository()
-
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
     var mCachedTasks: [String: Task]?
 
     // Prevent direct instantiation.
-    private init() {
+    public init() {
         let snt1 = ScopedNativeTraceSection("android_swift_systrace_001")
         let snt2 = ScopedNativeTraceSection("android_swift_systrace_002")
         let snt3 = ScopedNativeTraceSection("android_swift_systrace_003")
@@ -227,23 +225,6 @@ public class TasksRepository {
 
     enum MyError: Error {
         case forTest
-    }
-
-    /**
-     * Returns the single instance of this class, creating it if necessary.
-     *
-     * @return the {@link TasksRepository} instance
-     */
-    public static func getInstance() -> TasksRepository {
-        return INSTANCE
-    }
-
-    /**
-     * Used to force {@link #getInstance()} to create a new instance
-     * next time it's called.
-     */
-    public static func destroyInstance() {
-        // Do nothing
     }
 
     /**
