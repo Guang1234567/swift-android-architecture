@@ -11,7 +11,7 @@ export ANDROID_NDK_PATH=$ANDROID_NDK_HOME
 export NDK_TOOLCHAINS=$HOME/dev_kit/sdk/toolchain-wrapper
 
 
-export SWIFT_ANDROID_HOME=$HOME/dev_kit/sdk/swift_source/swift-android-5.4.2-release-ndk21
+export SWIFT_ANDROID_HOME=$HOME/dev_kit/sdk/swift_android_all_in_one/swift-android-5.4.2-release-ndk21
 export SWIFT_ANDROID_ARCH=aarch64
 #export SWIFT_ANDROID_ARCH=armv7
 #export SWIFT_ANDROID_ARCH=x86_64

@@ -43,7 +43,7 @@ public final class Task {
     private String description;
 
     @NonNull
-    private Boolean completed;
+    private boolean completed;
 
     // JNI Constructor
     private Task() {}
