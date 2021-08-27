@@ -42,7 +42,7 @@ public protocol GetTaskDelegate {
  * //TODO: Implement this class using LiveData.
  */
 public class TasksRepository {
-    private static let TAG = "TasksRepository"
+    static let TAG = "TasksRepository"
 
     /**
      * This variable has package local visibility so it can be accessed from tests.
@@ -51,6 +51,7 @@ public class TasksRepository {
 
     // Prevent direct instantiation.
     public init() {
+        ///*
         let snt1 = ScopedNativeTraceSection("android_swift_systrace_001")
         let snt2 = ScopedNativeTraceSection("android_swift_systrace_002")
         let snt3 = ScopedNativeTraceSection("android_swift_systrace_003")
@@ -60,7 +61,13 @@ public class TasksRepository {
 
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!")
         Backtrace.install()
-        // Backtrace.print()
+        A1()
+        //fatalError("test Backtrace !!!")
+        //let stackTrace: [String] = Thread.callStackSymbols;
+        //AndroidLogcat.w(TasksRepository.TAG, "Thread.callStackSymbols not working on Android! always stackTrace.length = \(stackTrace.count)")
+        //stackTrace.forEach {
+        //    AndroidLogcat.w(TasksRepository.TAG, $0)
+        //}
         AndroidLogcat.w(TasksRepository.TAG, "TasksRepository init !!!2222")
         // var crashExpected: String? = nil
         // crashExpected!.uppercased()
@@ -221,6 +228,7 @@ public class TasksRepository {
         } catch {
             AndroidLogcat.e(TasksRepository.TAG, "\(error)")
         }
+        // */
     }
 
     enum MyError: Error {
@@ -638,4 +646,72 @@ func makeCoFuture_02(_ name: String, _ dispatchQueue: DispatchQueue, _ i: Int) -
 
 enum TestError: Error {
     case SomeError(reason: String)
+}
+
+func A1() -> Void {
+    A2()
+}
+
+func A2() -> Void {
+    A3()
+}
+
+func A3() -> Void {
+    B1()
+}
+
+func B1() -> Void {
+    B2()
+}
+
+func B2() -> Void {
+    B3()
+}
+
+func B3() -> Void {
+    Van().drive()
+}
+
+class Van {
+    func drive() -> Void {
+
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, "👇👇👇 case1 :  print current")
+        Backtrace.current.frames.forEach {
+            AndroidLogcat.e(TasksRepository.TAG, $0.description)
+        }
+
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG,"👇👇👇👇👇 case2 : Backtrace.capture")
+        do {
+            try Backtrace.capture(from: oilEmpty)
+            //try oilEmpty()
+            //fatalError("Backtrace.capture(from: oilEmpty)")
+        } catch let err as Backtrace.Captured {
+            AndroidLogcat.e(TasksRepository.TAG, err.description)
+        } catch let uncaughtError {
+            AndroidLogcat.e(TasksRepository.TAG, "uncaught exception \(uncaughtError)")
+        }
+
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, " ")
+        AndroidLogcat.i(TasksRepository.TAG, "👇👇👇👇👇👇👇👇👇  case3 : fatalError")
+        //fatalError("Just test Backtrace !!!")
+        AndroidLogcat.i(TasksRepository.TAG, "👆👆👆👆👆👆👆👆👆  note: never print this line !!!")
+    }
+}
+
+func oilEmpty() throws -> Void {
+        1 + 1;
+        throw CarError.oilEmpty(message: "!!! oil empty !!!")
+    }
+
+enum CarError: Error {
+    case oilEmpty(message: String)
+    case flatTire(message: String)
 }

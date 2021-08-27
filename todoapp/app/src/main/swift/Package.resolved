@@ -23,8 +23,8 @@
         "package": "RxSwift",
         "repositoryURL": "https://hub.fastgit.org/Guang1234567/RxSwift.git",
         "state": {
-          "branch": "5.1.1_patch_support_android",
-          "revision": "3e6c9e7eb0d5f6e654248fa9182e643ee40ec5fb",
+          "branch": "android_support",
+          "revision": "d6afbac63db70c8655ee23ab6480987242368c57",
           "version": null
         }
       },
@@ -68,8 +68,8 @@
         "package": "swift-backtrace",
         "repositoryURL": "https://hub.fastgit.org/Guang1234567/swift-backtrace.git",
         "state": {
-          "branch": "master",
-          "revision": "6972557b88aeb28c87c440112c1b447bf75db5c7",
+          "branch": "android_support",
+          "revision": "13447cc7bbaa6b77295e22f25276207758a50dd9",
           "version": null
         }
       },
@@ -123,7 +123,7 @@
         "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Atomics.git",
         "state": {
           "branch": "master",
-          "revision": "32a8c89a132c5d6d4330002dc65af2953306d3b6",
+          "revision": "170360291102ce932d47837a3fbf4bbcc127d963",
           "version": null
         }
       },
@@ -132,7 +132,7 @@
         "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Boost_Context.git",
         "state": {
           "branch": "master",
-          "revision": "b5e7497a928c38e99cd4890ff0faf1c39866f0c8",
+          "revision": "ae95d566a512ac027c72b3cee13d10469438d2aa",
           "version": null
         }
       },
@@ -141,7 +141,16 @@
         "repositoryURL": "https://hub.fastgit.org/Guang1234567/Swift_Coroutine.git",
         "state": {
           "branch": "master",
-          "revision": "5797a8cbcf58041143d741cf049ba2c2e802d539",
+          "revision": "80b719ad4e731ffb58c4293035ba5fa68e53f2bf",
+          "version": null
+        }
+      },
+      {
+        "package": "Signals",
+        "repositoryURL": "https://github.com/Guang1234567/Swift_Signals.git",
+        "state": {
+          "branch": "android_support",
+          "revision": "178c9575b449357398364718fe3c092d5eddabbe",
           "version": null
         }
       },
