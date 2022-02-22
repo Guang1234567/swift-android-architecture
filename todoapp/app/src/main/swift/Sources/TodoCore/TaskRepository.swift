@@ -76,7 +76,7 @@ public class TasksRepository {
         ScopedNativeTraceSection.endTrace("android_swift_systrace_demo")
 
         let db = SQLiteDB()
-        let isOpened = db.open(dbPath: "/sdcard/test123.db")
+        let isOpened = db.open(dbPath: "/data/data/com.example.android.architecture.blueprints.todomvvmlive/cache/test123.db")
         AndroidLogcat.w(TasksRepository.TAG, "isOpened = \(isOpened)")
         let category1 = Category(db: db)
         category1.name = "My New Category1"
